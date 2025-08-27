@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-public class Controller {
+public class JogadorController {
 
     //Metodo publico para todos que acessarem a rota
     @GetMapping ("/boasvindas")
