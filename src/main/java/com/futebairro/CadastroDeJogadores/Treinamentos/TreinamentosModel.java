@@ -1,17 +1,21 @@
 package com.futebairro.CadastroDeJogadores.Treinamentos;
-
 import com.futebairro.CadastroDeJogadores.Jogadores.JogadorModel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_treinamentos")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TreinamentosModel {
-
     @Id
     private Long id;
 
