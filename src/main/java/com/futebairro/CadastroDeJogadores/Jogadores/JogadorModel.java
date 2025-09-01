@@ -24,6 +24,7 @@ public class JogadorModel {
 
     private String time;
 
+    @Column (unique = true)
     private String email;
 
     private int idade;
