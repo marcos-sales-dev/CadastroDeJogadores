@@ -1,7 +1,8 @@
-package com.futebairro.CadastroDeJogadores;
+package com.futebairro.CadastroDeJogadores.Jogadores;
 
+import com.futebairro.CadastroDeJogadores.Treinamentos.TreinamentosModel;
 import jakarta.persistence.*;
-import jdk.jfr.Enabled;
+import java.util.List;
 
 // @Entity ele transforma uma classe em uma entidade do banco de dados
 // JPA = Java Persistence API
@@ -11,10 +12,22 @@ public class JogadorModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
     private String time;
+
     private String email;
+
     private int idade;
+
+    private String posicao;
+
+    // @ManyToOne - Um jogador tem um único treinamento
+    @ManyToOne
+    @JoinColumn(name = "treinamentos_id") // Foreign Key ou Chave Estrangeira
+    private TreinamentosModel treinamentos;
+
 
     public JogadorModel() {
     }
@@ -25,6 +38,8 @@ public class JogadorModel {
         this.email = email;
         this.idade = idade;
     }
+
+
 
     public String getNome() {
         return nome;
@@ -57,4 +72,5 @@ public class JogadorModel {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
 }
