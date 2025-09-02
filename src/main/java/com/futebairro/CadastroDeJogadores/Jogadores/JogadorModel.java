@@ -18,17 +18,22 @@ import java.util.List;
 public class JogadorModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private Long id;
 
+    @Column (name = "nome")
     private String nome;
 
+    @Column (name = "time")
     private String time;
 
     @Column (unique = true)
     private String email;
 
+    @Column (name = "idade")
     private int idade;
 
+    @Column (name = "posicao")
     private String posicao;
 
     // @ManyToOne - Um jogador tem um único treinamento
