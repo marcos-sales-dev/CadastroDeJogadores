@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public class JogadorController {
 
     //Metodo publico para todos que acessarem a rota
-    @GetMapping ("/boasvindas")
+    @GetMapping ("/treinamentos")
     public String boasVindas(){
         return "Essa é minha primeira mensagem nessa rota";
     }
@@ -19,13 +19,13 @@ public class JogadorController {
     }
 
     // Mostrar todos os jogadores (READ)
-    @GetMapping ("/todos")
+    @GetMapping ("/listar")
     public String mostrarTodosOsJogadores(){
         return "Mostrar jogador";
     }
 
-    // Mostrar jogador por ID (READ)
-    @GetMapping ("/todosID")
+    // Mostrar jogadolr por ID (READ)
+    @GetMapping ("/listarID")
     public String mostrarTodosOsJogadoresPorId(){
         return "Mostrar jogador por ID";
     }
