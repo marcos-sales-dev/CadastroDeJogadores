@@ -33,9 +33,9 @@ public class JogadorController {
     }
 
     // Mostrar jogadolr por ID (READ)
-    @GetMapping ("/listarID")
-    public String listarJogadoresPorId(){
-        return "Mostrar jogador por ID";
+    @GetMapping ("/listar/{id}")
+    public JogadorModel listarJogadoresPorId(@PathVariable Long id){
+        return jogadorService.listarJogadoresPorId(id);
     }
 
     // Alterar dados dos jogadores (UPDATE)
