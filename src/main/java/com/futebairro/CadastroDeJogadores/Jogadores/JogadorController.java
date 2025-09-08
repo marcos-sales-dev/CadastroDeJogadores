@@ -2,12 +2,20 @@ package com.futebairro.CadastroDeJogadores.Jogadores;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping
+@RequestMapping ("/jogadores")
 public class JogadorController {
 
+    private JogadorService jogadorService;
+
+    public JogadorController(JogadorService jogadorService) {
+        this.jogadorService = jogadorService;
+    }
+
     //Metodo publico para todos que acessarem a rota
-    @GetMapping ("/treinamentos")
+    @GetMapping ("/boasvindas")
     public String boasVindas(){
         return "Essa é minha primeira mensagem nessa rota";
     }
@@ -20,13 +28,13 @@ public class JogadorController {
 
     // Mostrar todos os jogadores (READ)
     @GetMapping ("/listar")
-    public String mostrarTodosOsJogadores(){
-        return "Mostrar jogador";
+    public List<JogadorModel> listarJogadores(){
+        return jogadorService.listarJogadores();
     }
 
     // Mostrar jogadolr por ID (READ)
     @GetMapping ("/listarID")
-    public String mostrarTodosOsJogadoresPorId(){
+    public String listarJogadoresPorId(){
         return "Mostrar jogador por ID";
     }
 
