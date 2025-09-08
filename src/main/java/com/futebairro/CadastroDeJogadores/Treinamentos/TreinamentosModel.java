@@ -1,4 +1,5 @@
 package com.futebairro.CadastroDeJogadores.Treinamentos;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.futebairro.CadastroDeJogadores.Jogadores.JogadorModel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -25,5 +26,6 @@ public class TreinamentosModel {
 
     // @OneToMany - Um treinamento pode ter vários jogadores
     @OneToMany (mappedBy = "treinamentos")
+    @JsonIgnore
     private List<JogadorModel> jogadores;
 }
