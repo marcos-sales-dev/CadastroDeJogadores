@@ -39,9 +39,9 @@ public class JogadorController {
     }
 
     // Alterar dados dos jogadores (UPDATE)
-    @PutMapping ("/alterarID")
-    public String alterarJogadorPorId(){
-        return "Alterar jogador por id";
+    @PutMapping ("/alterar/{id}")
+    public JogadorModel alterarJogadorPorId(@PathVariable Long id, @RequestBody JogadorModel jogadorAtualizado){
+        return jogadorService.atualizarJogador(id, jogadorAtualizado);
     }
 
     // Deletar jogador (DELETE)

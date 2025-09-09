@@ -33,4 +33,13 @@ public class JogadorService {
     public void deletarJogadorPorId (Long id){
         jogadorRepository.deleteById(id);
     }
+
+    // Atualizar jogador
+    public JogadorModel atualizarJogador(Long id, JogadorModel jogadorAtualizado){
+        if(jogadorRepository.existsById(id)){
+            jogadorAtualizado.setId(id);
+            return jogadorRepository.save(jogadorAtualizado);
+        }
+        return null;
+    }
 }
