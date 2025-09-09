@@ -24,4 +24,9 @@ public class JogadorService {
         return jogadorPorId.orElse(null);
     }
 
+    // Criar um novo jogador
+    public JogadorModel criarJogador(JogadorModel jogador){
+        return jogadorRepository.save(jogador);
+    }
+
 }

@@ -22,8 +22,8 @@ public class JogadorController {
 
     //Adicionar jogador (CREATE)
     @PostMapping("/criar")
-    public String criarJogador(){
-        return "Jogador criado";
+    public JogadorModel criarJogador(@RequestBody JogadorModel jogador){
+        return jogadorService.criarJogador(jogador);
     }
 
     // Mostrar todos os jogadores (READ)
