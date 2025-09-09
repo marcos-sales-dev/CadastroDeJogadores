@@ -29,4 +29,8 @@ public class JogadorService {
         return jogadorRepository.save(jogador);
     }
 
+    // Deletar um jogador - Tem que ser um metodo VOID
+    public void deletarJogadorPorId (Long id){
+        jogadorRepository.deleteById(id);
+    }
 }

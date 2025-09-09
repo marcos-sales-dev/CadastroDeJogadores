@@ -45,8 +45,8 @@ public class JogadorController {
     }
 
     // Deletar jogador (DELETE)
-    @DeleteMapping ("/deletarID")
-    public String deletarJogadorPorId(){
-        return "Jogador deletado por id";
+    @DeleteMapping ("/deletar/{id}")
+    public void deletarJogadorPorId(@PathVariable Long id){
+        jogadorService.deletarJogadorPorId(id);
     }
 }
