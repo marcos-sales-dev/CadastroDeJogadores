@@ -9,10 +9,13 @@ import java.util.Optional;
 public class JogadorService {
 
     private JogadorRepository jogadorRepository;
+    private JogadorMapper jogadorMapper;
 
-    public JogadorService(JogadorRepository jogadorRepository) {
+    public JogadorService(JogadorRepository jogadorRepository, JogadorMapper jogadorMapper) {
         this.jogadorRepository = jogadorRepository;
+        this.jogadorMapper = jogadorMapper;
     }
+
     // Listar todos os meu jogadores
     public List<JogadorModel> listarJogadores(){
         return jogadorRepository.findAll();
@@ -25,8 +28,10 @@ public class JogadorService {
     }
 
     // Criar um novo jogador
-    public JogadorModel criarJogador(JogadorModel jogador){
-        return jogadorRepository.save(jogador);
+    public JogadorDTO criarJogador(JogadorDTO jogadorDTO){
+        JogadorModel jogador = jogadorMapper.map(jogadorDTO);
+        jogador = jogadorRepository.save(jogador);
+        return jogadorMapper.map(jogador);
     }
 
     // Deletar um jogador - Tem que ser um metodo VOID
