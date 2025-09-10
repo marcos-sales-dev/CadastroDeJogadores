@@ -22,25 +22,25 @@ public class JogadorController {
 
     //Adicionar jogador (CREATE)
     @PostMapping("/criar")
-    public JogadorDTO criarJogador(@RequestBody JogadorDTO jogador){
-        return jogadorService.criarJogador(jogador);
+    public JogadorDTO criarJogador(@RequestBody JogadorDTO jogadorDTO) {
+        return jogadorService.criarJogador(jogadorDTO);
     }
 
     // Mostrar todos os jogadores (READ)
     @GetMapping ("/listar")
-    public List<JogadorModel> listarJogadores(){
+    public List<JogadorDTO> listarJogadores(){
         return jogadorService.listarJogadores();
     }
 
     // Mostrar jogadolr por ID (READ)
     @GetMapping ("/listar/{id}")
-    public JogadorModel listarJogadoresPorId(@PathVariable Long id){
+    public JogadorDTO listarJogadoresPorId(@PathVariable Long id){
         return jogadorService.listarJogadoresPorId(id);
     }
 
     // Alterar dados dos jogadores (UPDATE)
     @PutMapping ("/alterar/{id}")
-    public JogadorModel alterarJogadorPorId(@PathVariable Long id, @RequestBody JogadorModel jogadorAtualizado){
+    public JogadorDTO alterarJogadorPorId(@PathVariable Long id, @RequestBody JogadorDTO jogadorAtualizado){
         return jogadorService.atualizarJogador(id, jogadorAtualizado);
     }
 
