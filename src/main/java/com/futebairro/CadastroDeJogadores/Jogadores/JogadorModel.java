@@ -39,6 +39,9 @@ public class JogadorModel {
     @Column (name = "posicao")
     private String posicao;
 
+    @Column (name = "rank")
+    private String rank;
+
     // @ManyToOne - Um jogador tem um único treinamento
     @ManyToOne
     @JoinColumn(name = "treinamentos_id") // Foreign Key ou Chave Estrangeira
