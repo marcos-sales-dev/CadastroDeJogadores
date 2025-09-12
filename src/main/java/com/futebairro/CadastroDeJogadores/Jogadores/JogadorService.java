@@ -50,7 +50,7 @@ public class JogadorService {
             JogadorModel jogadorAtualizado = jogadorMapper.map(jogadorDTO);
             jogadorAtualizado.setId(id);
             JogadorModel jogadorSalvo = jogadorRepository.save(jogadorAtualizado);
-            jogadorMapper.map(jogadorSalvo);
+            return jogadorMapper.map(jogadorSalvo);
         }
         return null;
 

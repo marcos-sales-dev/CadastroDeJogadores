@@ -1,5 +1,7 @@
 package com.futebairro.CadastroDeJogadores.Jogadores;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,31 +24,56 @@ public class JogadorController {
 
     //Adicionar jogador (CREATE)
     @PostMapping("/criar")
-    public JogadorDTO criarJogador(@RequestBody JogadorDTO jogadorDTO) {
-        return jogadorService.criarJogador(jogadorDTO);
+    public ResponseEntity<String> criarJogador(@RequestBody JogadorDTO jogadorDTO) {
+        JogadorDTO novoJogador = jogadorService.criarJogador(jogadorDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Jogador criado com sucesso: " + novoJogador.getNome() + " ID: " + novoJogador.getId());
     }
 
     // Mostrar todos os jogadores (READ)
     @GetMapping ("/listar")
-    public List<JogadorDTO> listarJogadores(){
-        return jogadorService.listarJogadores();
+    public ResponseEntity<List<JogadorDTO>> listarJogadores(){
+       List<JogadorDTO> jogadores = jogadorService.listarJogadores();
+       return ResponseEntity.ok(jogadores);
     }
 
     // Mostrar jogadolr por ID (READ)
     @GetMapping ("/listar/{id}")
-    public JogadorDTO listarJogadoresPorId(@PathVariable Long id){
-        return jogadorService.listarJogadoresPorId(id);
+    public ResponseEntity<?> listarJogadoresPorId(@PathVariable Long id){
+
+        JogadorDTO jogador = jogadorService.listarJogadoresPorId(id);
+        if (jogador !=null){
+            return ResponseEntity.ok(jogador);
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Jogador com id " + id + " não existe no banco de dados.");
+        }
     }
 
     // Alterar dados dos jogadores (UPDATE)
     @PutMapping ("/alterar/{id}")
-    public JogadorDTO alterarJogadorPorId(@PathVariable Long id, @RequestBody JogadorDTO jogadorAtualizado){
-        return jogadorService.atualizarJogador(id, jogadorAtualizado);
+    public ResponseEntity<?> alterarJogadorPorId(@PathVariable Long id, @RequestBody JogadorDTO jogadorAtualizado){
+
+        JogadorDTO jogador = jogadorService.atualizarJogador(id, jogadorAtualizado);
+        if (jogador != null) {
+            return ResponseEntity.ok(jogador);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                   .body("Jogador com id " + id + " não existe no banco de dados.");
+        }
+
     }
 
     // Deletar jogador (DELETE)
     @DeleteMapping ("/deletar/{id}")
-    public void deletarJogadorPorId(@PathVariable Long id){
-        jogadorService.deletarJogadorPorId(id);
+    public ResponseEntity<String> deletarJogadorPorId(@PathVariable Long id){
+
+        if (jogadorService.listarJogadoresPorId(id) !=null) {
+            jogadorService.deletarJogadorPorId(id);
+            return ResponseEntity.ok("Jogador com ID: " + id + " deletado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("O jogador com o id " + id + " não encontrado.");
+        }
     }
 }
