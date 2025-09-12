@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 @Service
 public class JogadorService {
 
-    private JogadorRepository jogadorRepository;
-    private JogadorMapper jogadorMapper;
+    private final JogadorRepository jogadorRepository;
+    private final JogadorMapper jogadorMapper;
 
     public JogadorService(JogadorRepository jogadorRepository, JogadorMapper jogadorMapper) {
         this.jogadorRepository = jogadorRepository;

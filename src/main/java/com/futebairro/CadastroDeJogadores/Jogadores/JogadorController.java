@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping ("/jogadores")
 public class JogadorController {
 
-    private JogadorService jogadorService;
+    private final JogadorService jogadorService;
 
     public JogadorController(JogadorService jogadorService) {
         this.jogadorService = jogadorService;
