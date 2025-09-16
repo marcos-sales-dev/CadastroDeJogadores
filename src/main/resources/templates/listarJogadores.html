@@ -1,0 +1,186 @@
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tabela de Jogadores</title>
+    <style>
+        /* ===== Corpo e Tipografia ===== */
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            margin: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* ===== Tabela ===== */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        thead {
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            color: #fff;
+        }
+
+        thead th {
+            padding: 15px 20px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        tbody tr {
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        tbody tr:hover {
+            background: #e0f2fe;
+            transform: scale(1.01);
+        }
+
+        tbody td {
+            padding: 12px 20px;
+            vertical-align: middle;
+            font-size: 0.9rem;
+        }
+
+        tbody td img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        /* ===== Botões ===== */
+        td a {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 2px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        td a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Botões coloridos com gradiente */
+        td a:contains("Ver detalhes") {
+            background: linear-gradient(45deg, #10b981, #34d399);
+            color: #fff;
+        }
+
+        td a:contains("Alterar") {
+            background: linear-gradient(45deg, #facc15, #fbbf24);
+            color: #fff;
+        }
+
+        td a:contains("Deletar") {
+            background: linear-gradient(45deg, #ef4444, #f87171);
+            color: #fff;
+        }
+
+        /* ===== Responsividade ===== */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tbody tr {
+                margin-bottom: 20px;
+                border-radius: 12px;
+                background: #fff;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+                padding: 15px;
+            }
+
+            tbody td {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+            }
+
+            tbody td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #555;
+            }
+
+            tbody td img {
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de Jogadores</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Imagem</th>
+        <th>Nome</th>
+        <th>Time</th>
+        <th>Idade</th>
+        <th>Email</th>
+        <th>Posição</th>
+        <th>Rank</th>
+        <th>Treinamentos</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="jogador : ${jogadores}">
+        <td th:text="${jogador.id}"></td>
+        <td><img th:src="${jogador.imgUrl}" width="100" height="100"></td>
+        <td th:text="${jogador.nome}"></td>
+        <td th:text="${jogador.time}"></td>
+        <td th:text="${jogador.idade}"></td>
+        <td th:text="${jogador.email}"></td>
+        <td th:text="${jogador.posicao}"></td>
+        <td th:text="${jogador.rank}"></td>
+        <td>
+                    <span th:if="${jogador.treinamentos}">
+                      <span th:if="${jogador.treinamentos}"><span th:text="${jogador.treinamentos.nome}"></span>, Dificuldade: <span th:text="${jogador.treinamentos.dificuldade}"></span></span>
+                      <span th:if="${jogador.treinamentos == null}">Sem treinamentos cadastrados para o jogador.</span>
+                    </span>
+        </td>
+        <td>
+            <a th:href="@{/jogadores/ui/detalhes/{id}(id=${jogador.id})}" class="ver-detalhes">Ver detalhes</a>
+            <a th:href="@{/jogadores/ui/#/{id}(id=${jogador.id})}">Alterar</a>
+            <a th:href="@{/jogadores/ui/deletar/{id}(id=${jogador.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

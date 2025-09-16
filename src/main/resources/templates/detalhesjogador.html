@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Jogador</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <style>
+        /* ===== Corpo e Tipografia ===== */
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        div {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        img {
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 20px;
+            width: 120px;
+            height: 120px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            object-fit: cover;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin: 8px 0;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        /* ===== Tabela interna de treinamentos ===== */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            color: #fff;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            background-color: #fff;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:hover td {
+            background-color: #e0f2fe;
+        }
+
+        /* ===== Botões de ação ===== */
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 18px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Botões coloridos conforme função */
+        a.ver-detalhes {
+            background: linear-gradient(45deg, #10b981, #34d399);
+        }
+
+        a.alterar {
+            background: linear-gradient(45deg, #facc15, #fbbf24);
+        }
+
+        a.deletar {
+            background: linear-gradient(45deg, #ef4444, #f87171);
+        }
+
+        /* ===== Responsividade ===== */
+        @media (max-width: 480px) {
+            div {
+                padding: 20px;
+            }
+
+            img {
+                width: 100px;
+                height: 100px;
+            }
+
+            table th, table td {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+
+            a {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Detalhes do Jogador</h1>
+<div>
+    <img th:src="${jogador.imgUrl}" alt="${jogador.nome}" width="200" />
+    <h2 th:text="${jogador.nome}"></h2>
+    <p><strong>Email:</strong> <span th:text="${jogador.email}"></span></p>
+    <p><strong>Idade:</strong> <span th:text="${jogador.idade}"></span></p>
+    <p><strong>Rank:</strong> <span th:text="${jogador.rank}"></span></p>
+
+    <h3>Treinamentos:</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Dificuldade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="treinamento : ${jogador.treinamentos}">
+            <td th:text="${treinamento.nome}"></td>
+            <td th:text="${treinamento.dificuldade}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a href="/jogadores/ui/listar">Voltar para a lista de jogadores</a>
+</body>
+</html>
